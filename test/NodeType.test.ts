@@ -9,8 +9,8 @@ import mockedFetch from 'node-fetch';
 
 import { HttpResource } from '../src';
 import { getConfig, setup } from '../src/config';
-import createResolve from '../src/types/createResolve';
 import NodeType from '../src/types/NodeType';
+import createResolve from '../src/types/createResolve';
 import { MockContext, TestHttpApi, TestHttpResource } from './helpers';
 
 describe('NodeType', () => {
@@ -57,7 +57,15 @@ describe('NodeType', () => {
       }
     }
 
-    const User: NodeType<WidgetResource> = new NodeType<WidgetResource>({
+    type WidgetSource = {
+      id: string;
+      favoriteColor: string;
+    };
+
+    const User: NodeType<WidgetResource> = new NodeType<
+      WidgetResource,
+      WidgetSource
+    >({
       name: 'User',
       fields: () => ({
         name: { type: GraphQLString },
